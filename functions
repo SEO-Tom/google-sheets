@@ -1,0 +1,13 @@
+# Google sheets Functions
+
+## Download sitemap
+`=IMPORTXML(B3, "//*[local-name() ='url']")`
+
+## Download sitemap and filter results
+A1 URL of sitemap
+A2 the term you would like to filter results bt
+`=query(IMPORTXML(A1, "//*[local-name() ='url']"),concatenate("Select * where Col1 contains '",A2,"'"))`
+
+## Return H1 - H3 
+Return headings levels 1 - 3
+`=unique(IMPORTXML(D5,"//section //h1|//h2|//h3"))`
