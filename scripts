@@ -1,0 +1,7 @@
+# Google Sheets Scripts
+
+## Get Header Response from URL
+function getHeader(url) {
+  var response = UrlFetchApp.fetch(url);
+  return response.getResponseCode(); 
+}
