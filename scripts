@@ -5,3 +5,36 @@ function getHeader(url) {
   var response = UrlFetchApp.fetch(url);
   return response.getResponseCode(); 
 }
+
+## Create hreflang XML using given values
+function buildHrefLangTags(listOfURLs,markets){
+  /* 
+    listOfURLs = a row of URLs which are different versions of the same page
+    markets = the markets values which are to be used to indicate market & language, market only or language only
+  */
+  var listOfURLsAsArray = listOfURLs[0];
+  var marketsAsArray = markets[0];
+  var count = listOfURLsAsArray.length;
+  var xmlTag = ``;
+
+    for(var indexNum in listOfURLsAsArray){
+      if(listOfURLsAsArray[indexNum].length >=5){
+              xmlTag = xmlTag + `<loc>${listOfURLsAsArray[indexNum]}</loc>
+`; //template string left to introduce line breaks in cells
+
+        for(var market of marketsAsArray){
+
+          if(listOfURLsAsArray[indexNum] !== listOfURLsAsArray[market]){
+
+            xmlTag = xmlTag + `<xhtml:link rel="alternate" hreflang="${market}"" href="${listOfURLsAsArray[indexNum]}"/>
+`; //template string left to introduce line breaks in cells
+          } else {
+            throw new Error("Not working");
+          }
+     }
+      }
+
+     
+  }
+  return xmlTag
+}
